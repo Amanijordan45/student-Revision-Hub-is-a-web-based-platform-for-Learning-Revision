@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Biology Revision</title>
+    <link rel="stylesheet" href="Math.css">
+</head>
+<body>
+
+<nav>
+    <h1>Student Revision Hub</h1>
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="math.html">Math</a></li>
+        <li><a href="physics.html">Physics</a></li>
+        <li><a href="chemistry.html">Chemistry</a></li>
+        <li><a href="biology.html">Biology</a></li>
+    </ul>
+</nav>
+
+<section class="math-container">
+    <h2>🧬 Biology</h2>
+    <p>Choose a topic below:</p>
+
+    <div class="topics">
+        <div class="card">
+            <h3>Cells</h3>
+            <button onclick="openBioLesson('cells')">Start Learning</button>
+        </div>
+
+        <div class="card">
+            <h3>Human Body</h3>
+            <button onclick="openBioLesson('body')">Start Learning</button>
+        </div>
+
+        <div class="card">
+            <h3>Plants</h3>
+            <button onclick="openBioLesson('plants')">Start Learning</button>
+        </div>
+    </div>
+
+    <div id="lesson-content"></div>
+
+    <!-- Quiz -->
+    <div class="quiz">
+        <h3>Quick Quiz</h3>
+        <p>What is the basic unit of life?</p>
+        <input type="text" id="bioAnswer">
+        <button onclick="checkBioQuiz()">Submit</button>
+        <p id="bioResult"></p>
+    </div>
+
+    <!-- Calculator -->
+    <div class="calculator">
+        <h3>Body Mass Index (BMI) Calculator</h3>
+        <input type="number" id="weight" placeholder="Weight (kg)">
+        <input type="number" id="height" placeholder="Height (meters)">
+        <button onclick="calculateBMI()">Calculate</button>
+        <p id="bmiResult"></p>
+    </div>
+
+    <!-- Progress -->
+    <div class="progress">
+        <h3>Your Progress</h3>
+        <p id="bioProgressStatus"></p>
+    </div>
+
+</section >
+<script src="biology.js">
+
+</script>
+
+</body>
+</html>

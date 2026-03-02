@@ -1,0 +1,311 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f4f6f9;
+}
+
+nav {
+    background: #1e3a8a;
+    color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+}
+
+.home {
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: #2563eb;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.math-container {
+    padding: 40px;
+    text-align: center;
+}
+
+.topics {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    width: 200px;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+}
+
+button {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.quiz, .calculator, .progress {
+    margin-top: 40px;
+}
+
+/* MOBILE RESPONSIVE STYLING */
+@media only screen and (max-width: 768px) {
+
+    nav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+        padding-left: 0;
+    }
+
+    .topics {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .card {
+        width: 100%;
+        max-width: 350px;
+        margin: 0 auto;
+    }
+
+    .home, .about-container, .math-container {
+        padding: 20px;
+    }
+
+    .calculator input, .quiz input {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .calculator button, .quiz button {
+        width: 100%;
+    }
+}
+
+
+/* SUBJECT GRID */
+.subjects-container {
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.subjects-container h2 {
+    color: #1e3a8a;
+    margin-bottom: 30px;
+}
+
+.subjects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+}
+
+.subject-card {
+    background: white;
+    padding: 25px 15px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.subject-card h3 {
+    color: #1e3a8a;
+    margin-bottom: 15px;
+}
+
+.subject-card p {
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.subject-card .btn {
+    text-decoration: none;
+    background: #2563eb;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 6px;
+    display: inline-block;
+    transition: background 0.3s;
+}
+
+.subject-card .btn:hover {
+    background: #1e40af;
+}
+
+.subject-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+/* Mobile Responsive */
+@media only screen and (max-width: 768px) {
+    .subjects-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* LIVE CHAT */
+.message .reactions span {
+    cursor: pointer;
+    margin-right: 5px;
+    font-size: 18px;
+    user-select: none;
+}
+
+.reaction-display {
+    margin-left: 5px;
+    font-size: 14px;
+}
+
+/* Scrollable chat box */
+.chat-box {
+    border: 1px solid #ccc;
+    height: 400px;
+    overflow-y: auto;
+    padding: 15px;
+    background: #f9f9f9;
+    margin-bottom: 15px;
+    border-radius: 10px;
+}
+
+/* Teacher / Student colors */
+.message.teacher .msg-text { background: #cbe7ff; }
+.message.student .msg-text { background: #d1f7c4; }
+
+/* LIVE CHAT STYLING */
+.live-container {
+    max-width: 700px;
+    margin: 50px auto;
+    text-align: center;
+}
+
+.chat-box {
+    border: 1px solid #ccc;
+    height: 400px;
+    overflow-y: auto;
+    padding: 15px;
+    background: #f9f9f9;
+    margin-bottom: 15px;
+    border-radius: 10px;
+}
+
+.chat-login input, .chat-login select {
+    padding: 10px;
+    margin: 5px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.chat-input input {
+    width: 70%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.chat-input button {
+    padding: 10px 20px;
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.chat-input button:hover {
+    background: #1e40af;
+}
+
+/* Messages */
+.message {
+    display: flex;
+    margin-bottom: 10px;
+    align-items: flex-start;
+}
+
+.msg-avatar {
+    font-size: 30px;
+    margin-right: 10px;
+}
+
+.msg-content {
+    text-align: left;
+}
+
+.msg-header {
+    font-size: 12px;
+    color: #555;
+    margin-bottom: 3px;
+}
+
+.msg-text {
+    background: #e0e0e0;
+    padding: 10px;
+    border-radius: 8px;
+    margin: 0;
+}
+
+.message.teacher .msg-text {
+    background: #cbe7ff;
+}
+
+.message.student .msg-text {
+    background: #d1f7c4;
+}
+
+/* Timestamp */
+.time {
+    font-size: 10px;
+    color: #999;
+    margin-left: 5px;
+}
+
+/* Mobile */
+@media only screen and (max-width: 768px) {
+    .chat-input input {
+        width: 60%;
+    }
+
+    .chat-login input, .chat-login select {
+        width: 45%;
+    }
+
+    .message {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .msg-avatar {
+        margin-bottom: 5px;
+    }
+}

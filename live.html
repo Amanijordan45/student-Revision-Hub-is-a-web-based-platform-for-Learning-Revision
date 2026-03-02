@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Live Connect - Student Revision Hub</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="Math.css">
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+</head>
+<body>
+
+<nav>
+    <h1>Student Revision Hub</h1>
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="live.html">Live Connect</a></li>
+    </ul>
+</nav>
+
+<section class="live-container">
+    <h2>Live Teacher-Student Chat</h2>
+
+    <!-- Chat Box -->
+    <div id="chatBox" class="chat-box"></div>
+
+    <!-- Login Info -->
+    <div class="chat-login">
+        <input type="text" id="username" placeholder="Your Name">
+        <select id="role">
+            <option value="student">Student</option>
+            <option value="teacher">Teacher</option>
+        </select>
+    </div>
+
+    <!-- Private chat option -->
+    <div class="chat-login">
+        <input type="text" id="privateTo" placeholder="Private chat with (optional)">
+    </div>
+
+    <!-- Message Input -->
+    <div class="chat-input">
+        <input type="text" id="messageInput" placeholder="Type your message">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+</section>
+
+<!-- Audio for notification -->
+<audio id="notificationSound" src="https://www.soundjay.com/button/beep-07.wav" preload="auto"></audio>
+
+<script>
+  // 🔹 Firebase Config
+  const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+    databaseURL: "https://YOUR_PROJECT_ID-default-rtdb.firebaseio.com",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_PROJECT_ID.appspot.com",
+    messagingSenderId: "YOUR_SENDER_ID",
+    appId: "YOUR_APP_ID"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+  const messagesRef = db.ref('messages');
+
+  // Listen for new messages
+  messagesRef.on('child_added', (snapshot) => {
+      const data = snapshot.val();
+      const chatBox = document.getElementById('chatBox');
+      const username = document.getElementById('username').value;
+      const privateTo = document.getElementById('privateTo').value.trim().toLowerCase();
+
+      // Private chat filter
+      if(privateTo && data.privateTo && data.privateTo.toLowerCase() !== username.toLowerCase() && data.username.toLowerCase() !== username.toLowerCase()){
+          return; 
+      }
+
+      // Create message element
+      const messageElement = document.createElement('div');
+      messageElement.classList.add('message', data.role);
+      messageElement.dataset.key = snapshot.key;
+
+      const time = new Date(data.timestamp);
+      const formattedTime = time.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+      const avatar = data.role === 'teacher' ? '👩‍🏫' : '👨‍🎓';
+
+      messageElement.innerHTML = `
+          <div class="msg-avatar">${avatar}</div>
+          <div class="msg-content">
+              <p class="msg-header"><strong>${data.username}</strong> (${data.role}) <span class="time">${formattedTime}</span></p>
+              <p class="msg-text">${data.message}</p>
+              <div class="reactions">
+                  <span onclick="addReaction('${snapshot.key}','👍')">👍</span>
+                  <span onclick="addReaction('${snapshot.key}','❤️')">❤️</span>
+                  <span onclick="addReaction('${snapshot.key}','😂')">😂</span>
+              </div>
+          </div>
+      `;
+
+      chatBox.appendChild(messageElement);
+      chatBox.scrollTop = chatBox.scrollHeight;
+
+      // Play notification if message is from someone else
+      if(data.username !== username) {
+          document.getElementById('notificationSound').play();
+      }
+
+      // Show existing reactions
+      if(data.reactions) {
+          for(const [emoji,count] of Object.entries(data.reactions)) {
+              const span = document.createElement('span');
+              span.classList.add('reaction-display');
+              span.innerText = `${emoji} ${count}`;
+              messageElement.querySelector('.reactions').appendChild(span);
+          }
+      }
+  });
+
+  // Send message
+  function sendMessage() {
+      const username = document.getElementById('username').value.trim();
+      const role = document.getElementById('role').value;
+      const message = document.getElementById('messageInput').value.trim();
+      const privateTo = document.getElementById('privateTo').value.trim();
+
+      if(username && message) {
+          messagesRef.push({
+              username,
+              role,
+              message,
+              privateTo: privateTo || null,
+              timestamp: Date.now(),
+              reactions: {}
+          });
+          document.getElementById('messageInput').value = '';
+      } else {
+          alert("Please enter your name and message!");
+      }
+  }
+
+  // Add emoji reaction
+  function addReaction(key, emoji) {
+      const msgRef = messagesRef.child(key).child('reactions');
+      msgRef.transaction(current => {
+          if(current) {
+              current[emoji] = (current[emoji] || 0) + 1;
+          } else {
+              current = {};
+              current[emoji] = 1;
+          }
+          return current;
+      });
+  }
+</script>
+
+</body>
+</html>

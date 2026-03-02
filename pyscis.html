@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Physics Revision</title>
+    <link rel="stylesheet" href="Math.css">
+</head>
+<body>
+
+<nav>
+    <h1>Student Revision Hub</h1>
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="math.html">Math</a></li>
+        <li><a href="physics.html">Physics</a></li>
+    </ul>
+</nav>
+
+<section class="math-container">
+    <h2>⚡ Physics</h2>
+    <p>Choose a topic below:</p>
+
+    <div class="topics">
+        <div class="card">
+            <h3>Motion</h3>
+            <button onclick="openPhysicsLesson('motion')">Start Learning</button>
+        </div>
+
+        <div class="card">
+            <h3>Force</h3>
+            <button onclick="openPhysicsLesson('force')">Start Learning</button>
+        </div>
+
+        <div class="card">
+            <h3>Energy</h3>
+            <button onclick="openPhysicsLesson('energy')">Start Learning</button>
+        </div>
+    </div>
+
+    <div id="lesson-content"></div>
+
+    <!-- Quiz -->
+    <div class="quiz">
+        <h3>Quick Quiz</h3>
+        <p>What is the formula for Force?</p>
+        <input type="text" id="physicsAnswer" placeholder="Type your answer">
+        <button onclick="checkPhysicsQuiz()">Submit</button>
+        <p id="physicsResult"></p>
+    </div>
+
+    <!-- Physics Calculator -->
+    <div class="calculator">
+        <h3>Force Calculator (F = m × a)</h3>
+        <input type="number" id="mass" placeholder="Mass (kg)">
+        <input type="number" id="acceleration" placeholder="Acceleration (m/s²)">
+        <button onclick="calculateForce()">Calculate</button>
+        <p id="forceResult"></p>
+    </div>
+
+    <!-- Progress -->
+    <div class="progress">
+        <h3>Your Progress</h3>
+        <p id="physicsProgressStatus"></p>
+    </div>
+
+</section>
+
+<script src="physcis.js">
+</script>
+
+</body>
+</html>

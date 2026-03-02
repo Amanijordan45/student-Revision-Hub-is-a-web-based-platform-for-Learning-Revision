@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chemistry Revision</title>
+    <link rel="stylesheet" href="Math.css">
+</head>
+<body>
+
+<nav>
+    <h1>Student Revision Hub</h1>
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="math.html">Math</a></li>
+        <li><a href="physics.html">Physics</a></li>
+        <li><a href="chemistry.html">Chemistry</a></li>
+    </ul>
+</nav>
+
+<section class="math-container">
+    <h2>🧪 Chemistry</h2>
+    <p>Choose a topic below:</p>
+
+    <div class="topics">
+        <div class="card">
+            <h3>Atoms</h3>
+            <button onclick="openChemLesson('atoms')">Start Learning</button>
+        </div>
+
+        <div class="card">
+            <h3>Acids & Bases</h3>
+            <button onclick="openChemLesson('acids')">Start Learning</button>
+        </div>
+
+        <div class="card">
+            <h3>Periodic Table</h3>
+            <button onclick="openChemLesson('periodic')">Start Learning</button>
+        </div>
+    </div>
+
+    <div id="lesson-content"></div>
+
+    <!-- Quiz -->
+    <div class="quiz">
+        <h3>Quick Quiz</h3>
+        <p>What is the chemical symbol for Water?</p>
+        <input type="text" id="chemAnswer">
+        <button onclick="checkChemQuiz()">Submit</button>
+        <p id="chemResult"></p>
+    </div>
+
+    <!-- Calculator -->
+    <div class="calculator">
+        <h3>Molar Mass Calculator (H₂O)</h3>
+        <p>Hydrogen = 1g/mol, Oxygen = 16g/mol</p>
+        <button onclick="calculateMolarMass()">Calculate H₂O</button>
+        <p id="molarResult"></p>
+    </div>
+
+    <!-- Progress -->
+    <div class="progress">
+        <h3>Your Progress</h3>
+        <p id="chemProgressStatus"></p>
+    </div>
+
+</section>
+
+<script src="chemestry.js">
+</script>
+
+</body>
+</html>
